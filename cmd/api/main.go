@@ -5,6 +5,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/softclub-go-0-0/crm-service/pkg/database"
 	"github.com/softclub-go-0-0/crm-service/pkg/handlers"
+	"github.com/softclub-go-0-0/crm-service/pkg/middlewares"
 	"log"
 	"os"
 )
@@ -30,6 +31,8 @@ func main() {
 	h := handlers.NewHandler(db)
 
 	router := gin.Default()
+
+	router.Use(middlewares.AuthMiddleware())
 
 	router.GET("/teachers", h.GetAllTeachers)
 	router.POST("/teachers", h.CreateTeacher)

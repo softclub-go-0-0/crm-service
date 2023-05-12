@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "github.com/as-salaam/auth-service/internal/auth";
+
+message User {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string phone = 4;
+  string email = 5;
+  repeated string roles = 6;
+}
+
+message AuthenticateRequest {
+  string token = 1;
+}
+
+message AuthenticateResponse {
+  bool authenticated = 1;
+  User user = 2;
+}
+
+service Auth {
+  rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse) {}
+}
